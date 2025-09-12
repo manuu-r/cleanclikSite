@@ -1,0 +1,56 @@
+{
+  "generated_at": "2025-08-19T05:25:51.728253",
+  "total_bins": 4,
+  "categories": ["recycle", "organic", "ewaste", "hazardous"],
+  "locations_count": 10,
+  "bins": [
+    {
+      "bin_id": "TEST_000_RECYCLE",
+      "category": "recycle",
+      "latitude": 37.7749,
+      "longitude": -122.4194,
+      "geohash": "9q8yyk8y",
+      "generated_at": "2025-08-19T05:25:51.483816",
+      "version": "1.0",
+      "location_name": "Downtown SF - Market St",
+      "qr_file": "./qr_codes/recycle_ecogems.png",
+      "filename": "recycle_ecogems"
+    },
+    {
+      "bin_id": "TEST_001_ORGANIC",
+      "category": "organic",
+      "latitude": 37.7849,
+      "longitude": -122.4094,
+      "geohash": "9q8yyw80",
+      "generated_at": "2025-08-19T05:25:51.648485",
+      "version": "1.0",
+      "location_name": "Downtown SF - Union Square",
+      "qr_file": "./qr_codes/organic_bioshards.png",
+      "filename": "organic_bioshards"
+    },
+    {
+      "bin_id": "TEST_003_EWASTE",
+      "category": "ewaste",
+      "latitude": 37.8719,
+      "longitude": -122.2585,
+      "geohash": "9q9p3yq5",
+      "generated_at": "2025-08-19T05:25:51.695545",
+      "version": "1.0",
+      "location_name": "UC Berkeley Campus",
+      "qr_file": "./qr_codes/ewaste_techcores.png",
+      "filename": "ewaste_techcores"
+    },
+    {
+      "bin_id": "TEST_004_HAZARDOUS",
+      "category": "hazardous",
+      "latitude": 37.8619,
+      "longitude": -122.2485,
+      "geohash": "9q9p6ht3",
+      "generated_at": "2025-08-19T05:25:51.712486",
+      "version": "1.0",
+      "location_name": "Berkeley Downtown",
+      "qr_file": "./qr_codes/hazardous_toxicvials.png",
+      "filename": "hazardous_toxicvials"
+    }
+  ]
+}

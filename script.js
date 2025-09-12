@@ -16,43 +16,46 @@ document.addEventListener("DOMContentLoaded", function () {
   const btnText = submitBtn.querySelector(".btn-text");
   const btnLoading = submitBtn.querySelector(".btn-loading");
 
-  emailForm.addEventListener("submit", async function (e) {
-    e.preventDefault();
+  if (emailForm) {
+    emailForm.addEventListener("submit", async function (e) {
+      e.preventDefault();
 
-    const email = document.getElementById("email").value.trim();
+      const email = document.getElementById("email").value.trim();
 
-    // Validate email
-    if (!validateEmail(email)) {
-      showError("Please enter a valid email address.");
-      return;
-    }
-
-    // Show loading state
-    setLoadingState(true);
-    hideMessages();
-
-    try {
-      const response = await fetch(emailForm.action, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: email }),
-      });
-
-      if (response.ok) {
-        showSuccess();
-        emailForm.reset();
-      } else {
-        showError("Something went wrong. Please try again.");
+      // Validate email
+      if (!validateEmail(email)) {
+        showError("Please enter a valid email address.");
+        return;
       }
-    } catch (error) {
-      console.error("Form submission error:", error);
-      showError("Network error. Please check your connection and try again.");
-    } finally {
-      setLoadingState(false);
-    }
-  });
+
+      // Show loading state
+      setLoadingState(true);
+      hideMessages();
+
+      try {
+        const response = await fetch(emailForm.action, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email: email }),
+        });
+
+        if (response.ok) {
+          showSuccess();
+          emailForm.reset();
+        } else {
+          showError("Something went wrong. Please try again.");
+        }
+      } catch (error) {
+        console.error("Form submission error:", error);
+        showError("Network error. Please check your connection and try again.");
+      } finally {
+        setLoadingState(false);
+      }
+    });
+  }
 
   function setLoadingState(loading) {
+    if (!submitBtn) return;
     submitBtn.disabled = loading;
     if (loading) {
       btnText.style.display = "none";
@@ -64,20 +67,47 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function showSuccess() {
+    if (!successMessage) return;
     successMessage.style.display = "block";
-    errorMessage.style.display = "none";
+    if (errorMessage) errorMessage.style.display = "none";
   }
 
   function showError(message) {
+    if (!errorMessage) return;
     errorMessage.querySelector("p").textContent = `⚠️ ${message}`;
     errorMessage.style.display = "block";
-    successMessage.style.display = "none";
+    if (successMessage) successMessage.style.display = "none";
   }
 
   function hideMessages() {
-    successMessage.style.display = "none";
-    errorMessage.style.display = "none";
+    if (successMessage) successMessage.style.display = "none";
+    if (errorMessage) errorMessage.style.display = "none";
   }
+
+  // QR Code Print Button
+  const printBtn = document.getElementById("print-qr-btn");
+  if (printBtn) {
+    printBtn.addEventListener("click", function () {
+      window.print();
+    });
+  }
+
+  // Scroll animations
+  const animatedElements = document.querySelectorAll(".fade-in");
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+        }
+      });
+    },
+    { threshold: 0.1 },
+  );
+
+  animatedElements.forEach((element) => {
+    observer.observe(element);
+  });
 });
 
 // Email validation function
