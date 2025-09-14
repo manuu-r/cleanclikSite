@@ -6,7 +6,7 @@
         <title>CleanClik - AR Urban Cleanup Game</title>
         <meta
             name="description"
-            content="CleanClik is an AR-powered mobile app that gamifies urban cleanup. Coming soon to iOS and Android."
+            content="CleanClik is an AR-powered mobile app that gamifies urban cleanup. Release for Android"
         />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -52,50 +52,115 @@
                         where's the fun in that?
                     </p>
 
-                    <!-- Coming Soon Content -->
-                    <div class="coming-soon-inline">
-                        <p class="coming-soon-text">
-                            Coming to Android & that other one.
-                        </p>
+                    <!-- Download Section -->
+                    <div class="download-section">
+                        <div class="platform-section unified-download">
+                            <div class="download-content">
+                                <!-- Android Available -->
+                                <div class="android-section">
+                                    <h3 class="platform-title">
+                                        <svg
+                                            class="platform-icon android-icon"
+                                            viewBox="0 0 24 24"
+                                            fill="currentColor"
+                                        >
+                                            <path
+                                                d="M17.523 15.3414c-.5665 0-1.0253-.4588-1.0253-1.0253s.4588-1.0253 1.0253-1.0253 1.0253.4588 1.0253 1.0253-.4588 1.0253-1.0253 1.0253zm-11.046 0c-.5665 0-1.0253-.4588-1.0253-1.0253s.4588-1.0253 1.0253-1.0253 1.0253.4588 1.0253 1.0253-.4588 1.0253-1.0253 1.0253zm11.405-6.34l1.994-3.467c.1253-.2174.0506-.4947-.1668-.6201-.2174-.1253-.4947-.0506-.6201.1668L17.16 8.77c-.8629-.3934-1.8186-.6201-2.8253-.6201s-1.9624.2267-2.8253.6201L9.5654 5.0681c-.1253-.2174-.4026-.2921-.6201-.1668-.2174.1253-.2921.4027-.1668.6201L10.792 8.98c-1.6587.7533-2.8253 2.4267-2.8253 4.36v.6533H16.033v-.6533c0-1.9333-1.1666-3.6067-2.8253-4.36z"
+                                            />
+                                        </svg>
+                                        Android - Available Now!
+                                    </h3>
+                                    <div class="download-area">
+                                        <a
+                                            href="https://github.com/manuu-r/cleanclik/releases/download/demo_v1.0/cleanclik_demo_v1.0.apk"
+                                            class="download-btn primary-download"
+                                        >
+                                            <svg
+                                                class="download-icon"
+                                                viewBox="0 0 24 24"
+                                                fill="currentColor"
+                                            >
+                                                <path
+                                                    d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z"
+                                                />
+                                            </svg>
+                                            Download APK
+                                            <span class="download-size"
+                                                >Demo v1.0</span
+                                            >
+                                        </a>
+                                        <a
+                                            href="https://github.com/manuu-r/cleanclik/releases/download/demo_v1.0/cleanclik_demo_v1.0.apk.sha1"
+                                            class="sha-link"
+                                        >
+                                            <svg
+                                                class="sha-icon"
+                                                viewBox="0 0 24 24"
+                                                fill="currentColor"
+                                            >
+                                                <path
+                                                    d="M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17.16,21.74 21,16.55 21,11V5L12,1M10,17L6,13L7.41,11.59L10,14.17L16.59,7.58L18,9L10,17Z"
+                                                />
+                                            </svg>
+                                            Verify SHA1
+                                        </a>
+                                    </div>
+                                </div>
 
-                        <form
-                            class="email-signup"
-                            id="email-form"
-                            action="https://formspree.io/f/xgvldejw"
-                            method="POST"
-                        >
-                            <input
-                                type="email"
-                                id="email"
-                                name="email"
-                                placeholder="Enter your email"
-                                required
-                            />
-                            <button type="submit" id="submit-btn">
-                                <span class="btn-text">Get Notified</span>
-                                <span class="btn-loading" style="display: none"
-                                    >Sending...</span
-                                >
-                            </button>
-                        </form>
+                                <!-- Other Platform Coming Soon -->
+                                <div class="other-section">
+                                    <p class="coming-soon-text">
+                                        Want for that other one? Sign up!
+                                    </p>
 
-                        <div
-                            class="success-message"
-                            id="success-message"
-                            style="display: none"
-                        >
-                            <p>
-                                🎉 Got it! We'll keep your email safe from
-                                litter until launch day.
-                            </p>
-                        </div>
+                                    <form
+                                        class="email-signup"
+                                        id="email-form"
+                                        action="https://formspree.io/f/xgvldejw"
+                                        method="POST"
+                                    >
+                                        <input
+                                            type="email"
+                                            id="email"
+                                            name="email"
+                                            placeholder="Enter your email"
+                                            required
+                                        />
+                                        <button type="submit" id="submit-btn">
+                                            <span class="btn-text"
+                                                >Get Notified</span
+                                            >
+                                            <span
+                                                class="btn-loading"
+                                                style="display: none"
+                                                >Sending...</span
+                                            >
+                                        </button>
+                                    </form>
 
-                        <div
-                            class="error-message"
-                            id="error-message"
-                            style="display: none"
-                        >
-                            <p>⚠️ Something went wrong. Please try again.</p>
+                                    <div
+                                        class="success-message"
+                                        id="success-message"
+                                        style="display: none"
+                                    >
+                                        <p>
+                                            🎉 Got it! We'll keep your email
+                                            safe from litter until launch day.
+                                        </p>
+                                    </div>
+
+                                    <div
+                                        class="error-message"
+                                        id="error-message"
+                                        style="display: none"
+                                    >
+                                        <p>
+                                            ⚠️ Something went wrong. Please try
+                                            again.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -360,9 +425,14 @@
         </div>
 
         <script src="script.js"></script>
-        <footer>
+        <footer class="footer">
             <div class="container">
-                <p>&copy; 2025 CleanClik. All rights reserved.</p>
+                <div class="footer-bottom">
+                    <p>&copy; 2025 CleanClik. All rights reserved.</p>
+                    <p class="footer-tagline">
+                        Making the world cleaner, one scan at a time 🌱
+                    </p>
+                </div>
             </div>
         </footer>
     </body>
