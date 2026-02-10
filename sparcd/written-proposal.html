@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sparcd Written Proposal</title>
+  <style>
+    :root {
+      --bg: #f6f8fc;
+      --card: #ffffff;
+      --ink: #1f2937;
+      --muted: #475569;
+      --line: #dbe3ef;
+      --accent: #0f766e;
+    }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+      line-height: 1.6;
+    }
+    main {
+      max-width: 920px;
+      margin: 34px auto;
+      padding: 0 18px;
+    }
+    article {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 28px;
+    }
+    h1, h2 { margin: 0 0 12px; }
+    h1 { font-size: 1.9rem; }
+    h2 {
+      margin-top: 24px;
+      font-size: 1.15rem;
+      color: var(--accent);
+      letter-spacing: 0.01em;
+    }
+    p { margin: 10px 0; }
+    ul { margin: 8px 0; padding-left: 20px; }
+    li { margin: 6px 0; }
+    .meta {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+    .badge {
+      display: inline-block;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 4px 10px;
+      margin-right: 8px;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+    .highlight {
+      border-left: 4px solid var(--accent);
+      padding: 8px 12px;
+      background: #f8fcfb;
+      border-radius: 6px;
+      margin: 14px 0;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <article>
+      <h1>Sparcd Written Proposal</h1>
+      <p class="meta"><strong>Focus:</strong> Problem, Target Audience, Monetization Strategy</p>
+      <p>
+        <span class="badge">Behavioral Psychology</span>
+        <span class="badge">AI Personalization</span>
+        <span class="badge">Execution Infrastructure</span>
+      </p>
+
+      <h2>1) PROBLEM</h2>
+      <p>The world does not have an ambition shortage. It has an execution shortage.</p>
+      <p>
+        People already know what they want: get fit, transition careers, build side income,
+        learn new skills, and complete meaningful life goals. What fails is daily conversion
+        from intention into action.
+      </p>
+      <p>
+        Most productivity products stop at planning and tracking. They assume users can self-plan
+        perfectly, self-motivate consistently, and self-recover quickly after misses.
+        Real behavior does not work that way. Friction compounds. Momentum breaks. Restart gets harder.
+      </p>
+      <div class="highlight">
+        Sparcd treats follow-through as a system design problem, not a motivation problem.
+      </div>
+
+      <h2>2) TARGET AUDIENCE</h2>
+      <p>
+        Sparcd is built for high-intent users with inconsistent execution. The initial wedge is women
+        in Gabby's community, where we observed a clear pattern: strong ambition, clear goals,
+        and a missing daily execution layer.
+      </p>
+      <ul>
+        <li><strong>Primary user profile:</strong> motivated adults who feel overwhelmed when goals become operational.</li>
+        <li><strong>Behavior profile:</strong> high aspiration, uneven consistency, repeated restart cycles.</li>
+        <li><strong>Core use cases:</strong> fitness, upskilling, career transitions, travel planning, and habit formation.</li>
+      </ul>
+      <p>
+        Long-term expansion is broad: any segment where the bottleneck is execution friction rather than idea generation.
+      </p>
+
+      <h2>How Sparcd Solves This</h2>
+      <p>
+        Sparcd is an AI-powered execution layer that transforms goals into a personalized, adaptive system users can sustain.
+        Instead of static plans, users get structured journeys with milestone logic and daily actions sized for completion.
+      </p>
+      <ul>
+        <li><strong>Micro-action design:</strong> tiny, clear actions reduce activation energy and increase daily completion probability.</li>
+        <li><strong>Persona personalization:</strong> pacing and framing adapt to user style (Explorer, Perfectionist, People Pleaser, Overthinker, Sprinter, Dreamer).</li>
+        <li><strong>Two-phase planning engine:</strong> goal analysis followed by milestone-based journey generation for stronger structure and relevance.</li>
+        <li><strong>Adaptive recovery:</strong> when users skip or stall, upcoming tasks are regenerated at lower friction instead of leaving users stuck.</li>
+        <li><strong>Reinforcement loops:</strong> celebration, streaks, and visible progress strengthen consistency.</li>
+        <li><strong>Action Links:</strong> select tasks include direct links to trusted external resources so users can execute immediately.</li>
+        <li><strong>Grounded guidance:</strong> recommendations are grounded to real-world resources, reducing vague AI output.</li>
+      </ul>
+      <p>
+        Product thesis: adherence is a design outcome. If the next step is clear, small, personalized,
+        and rewarding, users move from occasional motivation to compounding execution.
+      </p>
+
+      <h2>3) MONETIZATION STRATEGY</h2>
+      <p>
+        Sparcd uses a freemium subscription model with a clear value ladder from utility to outcomes.
+      </p>
+      <ul>
+        <li><strong>Free tier:</strong> core planning, daily actions, baseline reminders, and progress tracking.</li>
+        <li><strong>Pro tier:</strong> deeper personalization, optimized notification timing, richer guidance, and advanced adaptive capabilities.</li>
+      </ul>
+      <p>
+        Monetization is implemented through RevenueCat with entitlement-based backend gating and native mobile purchase flows.
+        This enables fast packaging/price iteration while preserving deterministic feature access.
+      </p>
+      <p>
+        Users upgrade for one reason: better follow-through outcomes. The paid tier improves consistency,
+        reduces restart friction, and increases confidence that goals actually move forward each day.
+      </p>
+
+      <h2>Monetization Logic</h2>
+      <ul>
+        <li><strong>Clear value ladder:</strong> free builds habit, Pro improves results.</li>
+        <li><strong>Daily habit loop:</strong> high-frequency engagement supports retention and subscription durability.</li>
+        <li><strong>Personalization flywheel:</strong> more usage improves adaptation quality and perceived paid value.</li>
+        <li><strong>Category expansion:</strong> the same execution engine scales across health, career, learning, and planning.</li>
+      </ul>
+      <div class="highlight">
+        Strategic direction: build the default execution platform for personal goals,
+        where AI is measured by real-world follow-through, not content generation alone.
+      </div>
+    </article>
+  </main>
+</body>
+</html>
