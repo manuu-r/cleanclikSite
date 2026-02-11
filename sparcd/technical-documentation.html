@@ -1,246 +1,836 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Sparcd Technical Documentation</title>
-  <style>
-    :root {
-      --bg: #f7fafc;
-      --card: #ffffff;
-      --ink: #1f2937;
-      --muted: #4b5563;
-      --line: #d9e2ef;
-      --accent: #0f766e;
-      --code-bg: #f1f5f9;
-    }
-    body {
-      margin: 0;
-      background: var(--bg);
-      color: var(--ink);
-      font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
-      line-height: 1.6;
-    }
-    main {
-      max-width: 980px;
-      margin: 34px auto;
-      padding: 0 18px;
-    }
-    article {
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      padding: 28px;
-    }
-    h1, h2 { margin: 0 0 12px; }
-    h1 { font-size: 1.9rem; }
-    h2 {
-      margin-top: 26px;
-      font-size: 1.15rem;
-      color: var(--accent);
-    }
-    p { margin: 10px 0; color: var(--ink); }
-    ul { margin: 8px 0; padding-left: 20px; }
-    li { margin: 6px 0; }
-    code {
-      background: var(--code-bg);
-      padding: 2px 6px;
-      border-radius: 6px;
-      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-      font-size: 0.92em;
-    }
-    .meta { color: var(--muted); font-size: 0.95rem; }
-    .spec {
-      border: 1px solid var(--line);
-      border-radius: 10px;
-      padding: 12px 14px;
-      margin: 10px 0;
-      background: #fbfdff;
-    }
-    .mermaid {
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      padding: 10px;
-      background: #fcfeff;
-      margin: 12px 0 16px;
-    }
-  </style>
-  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
-  <script>
-    mermaid.initialize({ startOnLoad: true, theme: "default", securityLevel: "loose" });
-  </script>
-</head>
-<body>
-  <main>
-    <article>
-      <h1>Sparcd Technical Documentation</h1>
-      <p class="meta">Tech stack, architecture, core flows, and RevenueCat implementation</p>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>SPARCD Technical Documentation</title>
+        <style>
+            :root {
+                --bg: #f5f5f5;
+                --paper: #ffffff;
+                --ink: #121212;
+                --muted: #666666;
+                --line: #dedede;
+                --line-strong: #cccccc;
+                --turquoise: #00666c;
+                --coral: #c65d52;
+                --orange: #ec935e;
+                --turquoise-soft: rgba(0, 102, 108, 0.07);
+            }
 
-      <h2>1) Tech Stack</h2>
-      <ul>
-        <li><strong>Mobile</strong>: Flutter, Dart, Riverpod, GoRouter, Dio, Firebase Messaging, local notifications.</li>
-        <li><strong>Backend</strong>: FastAPI (async), Pydantic, JWT auth, OAuth providers (Google/Apple).</li>
-        <li><strong>Data</strong>: MongoDB + Beanie ODM, Redis.</li>
-        <li><strong>AI</strong>: Gemini models with Google Search grounding and tier-based model routing.</li>
-        <li><strong>Billing</strong>: RevenueCat SDK on client + backend webhook/refresh sync.</li>
-        <li><strong>Infra</strong>: Docker, Docker Compose, GitHub Actions deployment workflows.</li>
-      </ul>
+            * {
+                box-sizing: border-box;
+            }
 
-      <h2>2) Runtime Architecture</h2>
-      <p>
-        Sparcd runs as a client-server system where the Flutter app handles interaction and rendering,
-        while the FastAPI backend orchestrates AI planning, state transitions, notifications, and monetization gates.
-      </p>
-      <div class="mermaid">
-graph TD
-  A[Flutter App] -->|REST /v1| B[FastAPI API Layer]
-  B --> C[Goal + Task Engines]
-  C --> D[Gemini + Grounding]
-  B --> E[(MongoDB/Beanie)]
-  B --> F[(Redis)]
-  B --> G[Notification Scheduler]
-  G --> H[Firebase Cloud Messaging]
-  H --> A
-  B --> I[RevenueCat Service]
-      </div>
+            html,
+            body {
+                margin: 0;
+                padding: 0;
+            }
 
-      <h2>3) API Surface</h2>
-      <p>
-        The backend is versioned under <code>/v1</code> and grouped by route modules:
-      </p>
-      <div class="spec">
-        <ul>
-          <li><code>/auth</code> for signup/login/refresh/social auth</li>
-          <li><code>/profile</code> for persona and profile controls</li>
-          <li><code>/goals</code> for goal CRUD and analysis triggers</li>
-          <li><code>/tasks</code> for daily task retrieval, generation/reveal, completion, skip/pause/snooze</li>
-          <li><code>/milestones</code> and <code>/progress</code> for journey tracking</li>
-          <li><code>/ai</code> for analysis and diagnostics</li>
-          <li><code>/billing</code> for RevenueCat webhook and subscription refresh</li>
-          <li><code>/insights</code> for insight endpoints</li>
-        </ul>
-      </div>
+            body {
+                font-family:
+                    -apple-system, BlinkMacSystemFont, "SF Pro Text",
+                    "Helvetica Neue", Helvetica, Arial, sans-serif;
+                color: var(--ink);
+                background: var(--bg);
+                line-height: 1.6;
+            }
 
-      <h2>4) Goal-to-Execution Flow</h2>
-      <p>
-        Sparcd’s core behavior loop is intentionally structured: analyze goal, generate journey, reveal
-        daily tasks, update streak/milestones, then adapt if the user stalls.
-      </p>
-      <div class="mermaid">
-sequenceDiagram
-  participant U as User
-  participant APP as Flutter App
-  participant API as FastAPI
-  participant GA as Goal Analyzer
-  participant JG as Journey Generator
-  participant TD as Task Designer
-  participant MT as Milestone Tracker
-  participant AA as Adaptive Adjuster
+            .page-shell {
+                max-width: 980px;
+                margin: 0 auto;
+                padding: 28px 18px 56px;
+            }
 
-  U->>APP: Create goal
-  APP->>API: POST /v1/goals
-  APP->>API: POST /v1/goals/{goal_id}/analyze
-  API->>GA: Grounded goal analysis
-  API->>JG: Generate full journey (skeleton -> detail)
-  APP->>API: POST /v1/tasks/generate-today
-  API->>TD: Reveal today's batch
-  U->>APP: Complete/skip task
-  APP->>API: Task status update
-  API->>MT: Recompute milestone progress
-  API->>AA: If stall patterns detected, regenerate remaining tasks
-      </div>
+            .hero {
+                background: var(--paper);
+                color: var(--ink);
+                border: 1px solid var(--line-strong);
+                border-top: 2px solid var(--turquoise);
+                border-radius: 12px;
+                padding: 24px 22px;
+                display: grid;
+                gap: 16px;
+            }
 
-      <h2>5) AI and Personalization Specs</h2>
-      <ul>
-        <li><strong>Tier-based model routing</strong>: free/pro users can be routed to different Gemini models.</li>
-        <li><strong>Grounded generation</strong>: analysis and planning flows can include web grounding and citations metadata.</li>
-        <li><strong>Two-phase journey generation</strong>: a skeleton pass for structure, then detail enrichment for behavioral fields.</li>
-        <li><strong>Persona-aware prompting</strong>: planner and messaging layers adjust framing by persona profile.</li>
-        <li><strong>Adaptive re-planning</strong>: skip/stall signals trigger lower-friction task regeneration for remaining journey days.</li>
-      </ul>
+            .hero::after {
+                content: none;
+            }
 
-      <h2>6) Data Model Specs</h2>
-      <div class="spec">
-        <p><strong>UserProfile highlights</strong></p>
-        <ul>
-          <li>Persona, psychological profile dimensions, and behavior signals.</li>
-          <li>Notification behavior fields: response rate, streak sensitivity, last daily notification timestamp.</li>
-          <li>Subscription fields: tier, entitlements, last subscription sync timestamp.</li>
-          <li>Auth profile: email/password, social providers, verification and reset fields.</li>
-        </ul>
-      </div>
-      <div class="spec">
-        <p><strong>Task highlights</strong></p>
-        <ul>
-          <li>Tiny-habit structure: anchor moment, tiny version, celebration prompt.</li>
-          <li>Ability factors for friction scoring (time, effort, brain cycles, money, routine).</li>
-          <li>Journey fields: <code>day_number</code>, <code>revealed</code>, <code>journey_day_revealed_at</code>, <code>milestone_id</code>.</li>
-          <li>Execution fields: priority, due date, status, pause/snooze metadata.</li>
-          <li>Action link fields for external opportunities: <code>action_link</code>, <code>action_label</code>.</li>
-        </ul>
-      </div>
+            h1,
+            h2,
+            h3,
+            h4 {
+                margin: 0;
+                font-family:
+                    -apple-system, BlinkMacSystemFont, "SF Pro Display",
+                    "Helvetica Neue", Helvetica, Arial, sans-serif;
+                line-height: 1.25;
+                letter-spacing: 0;
+            }
 
-      <h2>7) Notification Delivery Specs</h2>
-      <ul>
-        <li>Scheduler starts with app lifespan and runs periodic ticks.</li>
-        <li>Processes users with valid FCM tokens and timezone-aware local windows.</li>
-        <li>Selects eligible task pool (today + overdue), then applies timing logic.</li>
-        <li>Supports tier-aware reminder timing (optimized notification mode for premium gate).</li>
-        <li>Sends high-priority FCM payloads with deep links and task metadata.</li>
-      </ul>
-      <div class="mermaid">
-flowchart LR
-  A[Scheduler Tick] --> B[Load Users with FCM]
-  B --> C[Resolve Local Time Window]
-  C --> D[Select Pending/Overdue Task]
-  D --> E[Compose Persona-Aware Reminder]
-  E --> F[Send FCM]
-  F --> G[Persist last_daily_notification_at]
-      </div>
+            h1 {
+                font-size: clamp(1.65rem, 2.2vw, 2.15rem);
+                font-weight: 600;
+                margin-bottom: 6px;
+            }
 
-      <h2>8) RevenueCat Implementation</h2>
-      <p>
-        RevenueCat is implemented as both a client purchase layer and a backend entitlement authority.
-        The backend supports webhook ingestion and manual refresh for deterministic subscription state.
-      </p>
-      <ul>
-        <li><code>POST /v1/billing/revenuecat/webhook</code>: validates webhook auth, resolves user by <code>app_user_id</code>/<code>aliases</code>, and schedules async sync.</li>
-        <li><code>POST /v1/billing/refresh</code>: authenticated user-triggered refresh of tier and active entitlements.</li>
-      </ul>
-      <div class="mermaid">
-sequenceDiagram
-  participant RC as RevenueCat
-  participant API as Billing API
-  participant SVC as RevenueCat Service
-  participant DB as UserProfile
+            .hero-subtitle {
+                font-size: 1rem;
+                color: var(--muted);
+                margin-bottom: 0;
+                max-width: 68ch;
+            }
 
-  RC->>API: POST /v1/billing/revenuecat/webhook
-  API->>API: Verify webhook auth
-  API->>SVC: find_user_by_app_user_ids(...)
-  API->>SVC: sync_user_subscription(...)
-  SVC->>RC: Fetch customer (V2 API)
-  SVC->>DB: Update tier + entitlements + timestamp
-      </div>
+            .hero-main {
+                display: grid;
+                gap: 8px;
+            }
 
-      <h2>9) Subscription Gates and Feature Access</h2>
-      <p>
-        Feature gates are tier-driven (<code>free</code>, <code>pro</code>) and used across guidance depth,
-        notification optimization, memory access window, and advanced AI capabilities.
-      </p>
-      <ul>
-        <li>Goal creation limits by tier.</li>
-        <li>Premium-only flags for advanced guidance and optimized notifications.</li>
-        <li>Entitlements persisted in user records after webhook/manual sync.</li>
-      </ul>
+            .hero-meta {
+                border-top: 1px solid var(--line);
+                padding-top: 12px;
+            }
 
-      <h2>10) Reliability and Ops Notes</h2>
-      <ul>
-        <li>Async architecture for API and background scheduler workflows.</li>
-        <li>Fallback behavior in AI flows to reduce hard failures when model calls fail or rate-limit.</li>
-        <li>Containerized deployment for reproducibility across environments.</li>
-        <li>Health endpoint available at <code>/health</code>.</li>
-      </ul>
-    </article>
-  </main>
-</body>
+            .meta-grid {
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+
+            .meta-chip {
+                background: transparent;
+                border: 1px solid var(--line);
+                border-radius: 8px;
+                padding: 10px 11px;
+                font-size: 0.92rem;
+                text-align: left;
+            }
+
+            .meta-chip strong {
+                color: var(--turquoise);
+                font-weight: 600;
+            }
+
+            .layout {
+                display: grid;
+                gap: 12px;
+                margin-top: 12px;
+            }
+
+            section {
+                background: var(--paper);
+                border: 1px solid var(--line);
+                border-radius: 12px;
+                padding: 22px 20px;
+            }
+
+            h2 {
+                color: var(--turquoise);
+                margin-bottom: 10px;
+                font-size: clamp(1.15rem, 1.5vw, 1.38rem);
+                font-weight: 600;
+            }
+
+            h3 {
+                margin-top: 18px;
+                margin-bottom: 8px;
+                color: var(--ink);
+                font-size: 1.03rem;
+                font-weight: 600;
+            }
+
+            h4 {
+                margin-top: 14px;
+                margin-bottom: 6px;
+                color: var(--ink);
+                font-size: 0.98rem;
+                font-weight: 600;
+            }
+
+            p {
+                margin: 0 0 10px;
+                color: var(--ink);
+            }
+
+            ul,
+            ol {
+                margin: 0 0 14px;
+                padding-left: 21px;
+            }
+
+            li {
+                margin: 6px 0;
+            }
+
+            .callout {
+                border-left: 3px solid var(--coral);
+                background: #fafafa;
+                border-radius: 8px;
+                padding: 12px 14px;
+                margin: 10px 0 14px;
+            }
+
+            hr {
+                border: none;
+                border-top: 1px solid var(--line);
+                margin: 18px 0;
+            }
+
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-top: 10px;
+                font-size: 0.95rem;
+                overflow: hidden;
+                border-radius: 10px;
+                border: 1px solid var(--line);
+            }
+
+            th,
+            td {
+                border-bottom: 1px solid var(--line);
+                padding: 11px 12px;
+                vertical-align: top;
+                text-align: left;
+            }
+
+            th {
+                background: var(--turquoise-soft);
+                color: var(--turquoise);
+                font-weight: 600;
+            }
+
+            tr:nth-child(even) td {
+                background: #fcfcfc;
+            }
+
+            .kpi-row {
+                display: grid;
+                gap: 10px;
+                grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+                margin: 12px 0;
+            }
+
+            .kpi {
+                border-radius: 10px;
+                border: 1px solid var(--line);
+                background: var(--paper);
+                padding: 12px;
+            }
+
+            .kpi strong {
+                display: block;
+                color: var(--turquoise);
+                margin-bottom: 4px;
+                font-size: 0.85rem;
+                letter-spacing: 0.02em;
+                text-transform: none;
+            }
+
+            .footnote {
+                font-size: 0.9rem;
+                color: var(--muted);
+            }
+
+            .mermaid-wrap {
+                margin: 10px 0 14px;
+                border: 1px solid var(--line);
+                border-radius: 10px;
+                padding: 10px;
+                background: #fcfcfc;
+            }
+
+            .mermaid {
+                width: 100%;
+                overflow-x: auto;
+            }
+
+            code {
+                background: var(--turquoise-soft);
+                border: 1px solid var(--line);
+                border-radius: 6px;
+                padding: 0 6px;
+                font-family:
+                    ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+                font-size: 0.9em;
+            }
+
+            @media (max-width: 760px) {
+                .page-shell {
+                    padding: 20px 14px 40px;
+                }
+
+                .hero {
+                    padding: 18px 16px 16px;
+                    gap: 10px;
+                }
+
+                .meta-grid {
+                    grid-template-columns: 1fr;
+                }
+
+                section {
+                    padding: 19px 16px;
+                    border-radius: 10px;
+                }
+
+                table,
+                thead,
+                tbody,
+                th,
+                td,
+                tr {
+                    display: block;
+                }
+
+                thead {
+                    display: none;
+                }
+
+                tr {
+                    border-bottom: 1px solid var(--line);
+                }
+
+                td {
+                    border: none;
+                    padding: 9px 8px;
+                }
+
+                td::before {
+                    content: attr(data-label);
+                    display: block;
+                    font-weight: 600;
+                    color: var(--turquoise);
+                    margin-bottom: 2px;
+                }
+            }
+        </style>
+        <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+        <script>
+            mermaid.initialize({
+                startOnLoad: true,
+                theme: "neutral",
+                securityLevel: "loose",
+            });
+        </script>
+    </head>
+    <body>
+        <div class="page-shell">
+            <header class="hero">
+                <div class="hero-main">
+                    <h1>SPARCD Technical Documentation</h1>
+                    <p class="hero-subtitle">
+                        Sparcd is a mobile-first goal achievement platform that
+                        combines evidence-based behavioral psychology with
+                        modern cloud infrastructure.
+                    </p>
+                </div>
+                <div class="hero-meta">
+                    <div class="meta-grid">
+                        <div class="meta-chip">
+                            <strong>Project</strong>: Sparcd -
+                            Psychology-Informed Goal Achievement Platform
+                            <br />
+                            <strong>Last Updated</strong>: February 2026
+                            <br />
+                            <strong>Architecture</strong>: Flutter + FastAPI +
+                            MongoDB + Redis + Firebase
+                            <br />
+                            <strong>Monetization</strong>: Freemium via
+                            RevenueCat (Free/Pro tiers)
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <main class="layout">
+                <section>
+                    <h2>Executive Summary</h2>
+                    <p>
+                        Sparcd is a mobile-first goal achievement platform that
+                        combines evidence-based behavioral psychology with
+                        modern cloud infrastructure. The system breaks large
+                        goals into daily micro-actions and personalizes every
+                        interaction: notification timing, task difficulty,
+                        celebration intensity, and messaging tone, based on an
+                        8-dimensional psychology profile.
+                    </p>
+                    <p>
+                        <strong>Core Innovation</strong>: Psychology-driven
+                        personalization engine adapting to individual user
+                        behavior
+                    </p>
+                    <p>
+                        <strong>Monetization</strong>: Freemium model via
+                        RevenueCat (Free/Pro tiers)
+                    </p>
+                </section>
+
+                <section>
+                    <h2>Technology Stack</h2>
+
+                    <h3>Frontend</h3>
+                    <ul>
+                        <li>
+                            <strong>Framework</strong>: Flutter (cross-platform
+                            iOS/Android)
+                        </li>
+                        <li>
+                            <strong>State Management</strong>: Riverpod
+                            (reactive, type-safe)
+                        </li>
+                        <li>
+                            <strong>Navigation</strong>: GoRouter (auth-aware)
+                        </li>
+                        <li><strong>HTTP</strong>: Dio (auto token-refresh)</li>
+                        <li>
+                            <strong>Storage</strong>: Secure keychain/keystore +
+                            local preferences
+                        </li>
+                        <li><strong>Payments</strong>: RevenueCat SDK</li>
+                        <li>
+                            <strong>Notifications</strong>: Firebase Cloud
+                            Messaging
+                        </li>
+                        <li>
+                            <strong>UI</strong>: Material 3 with custom
+                            animations
+                        </li>
+                    </ul>
+
+                    <h3>Backend</h3>
+                    <ul>
+                        <li>
+                            <strong>Framework</strong>: FastAPI (async Python)
+                        </li>
+                        <li>
+                            <strong>Database</strong>: MongoDB
+                            (document-oriented)
+                        </li>
+                        <li>
+                            <strong>Cache</strong>: Redis (task lookup, rate
+                            limits)
+                        </li>
+                        <li><strong>AI</strong>: Large language models</li>
+                        <li><strong>Auth</strong>: JWT with refresh tokens</li>
+                        <li>
+                            <strong>Notifications</strong>: Firebase Admin SDK
+                        </li>
+                        <li>
+                            <strong>Payments</strong>: RevenueCat HTTP API +
+                            webhooks
+                        </li>
+                    </ul>
+
+                    <h3>Infrastructure</h3>
+                    <ul>
+                        <li>
+                            <strong>Hosting</strong>: Google Cloud Run
+                            (serverless)
+                        </li>
+                        <li>
+                            <strong>Database</strong>: MongoDB Atlas (managed)
+                        </li>
+                        <li><strong>Cache</strong>: Redis Cloud (managed)</li>
+                        <li><strong>CI/CD</strong>: GitHub Actions</li>
+                        <li>
+                            <strong>Registry</strong>: Google Artifact Registry
+                        </li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>System Architecture</h2>
+                    <div class="mermaid-wrap">
+                        <div class="mermaid">
+                            flowchart TB
+                            A["Mobile App"]
+                            B["Backend API"]
+                            C["MongoDB Atlas"]
+                            D["Redis Cache"]
+                            E["Firebase FCM"]
+                            A -->|REST HTTPS| B
+                            B --> C
+                            B --> D
+                            B --> E
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <h2>Personalization Engine</h2>
+
+                    <h3>1. Psychology Profiling</h3>
+                    <p>
+                        <strong>Free Users</strong>: Select 1 of 6 personas
+                        (explorer, perfectionist, people_pleaser, overthinker,
+                        sprinter, dreamer)
+                    </p>
+                    <p>
+                        <strong>Pro Users</strong>: Complete 8-dimension quiz:
+                    </p>
+                    <ul>
+                        <li>
+                            <strong>Growth vs. Fixed Mindset</strong>: Affects
+                            praise style
+                        </li>
+                        <li>
+                            <strong>Confidence</strong>: Determines task
+                            difficulty
+                        </li>
+                        <li>
+                            <strong>Rumination Tendency</strong>: Task
+                            complexity and framing
+                        </li>
+                        <li>
+                            <strong>Shame Sensitivity</strong>: Language
+                            softening
+                        </li>
+                        <li>
+                            <strong>Stimulation Tolerance</strong>: Celebration
+                            intensity
+                        </li>
+                        <li>
+                            <strong>Attachment Style</strong>: Notification
+                            frequency and reassurance
+                        </li>
+                        <li>
+                            <strong>Preferred Pace</strong>: Task volume and
+                            spacing
+                        </li>
+                        <li>
+                            <strong>Recovery Pattern</strong>: Comeback vs. rest
+                            routing
+                        </li>
+                    </ul>
+                    <p>
+                        Profile stored in MongoDB; cached in Redis for fast
+                        personalization.
+                    </p>
+
+                    <h3>2. Usage Tracking and Optimal Timing</h3>
+                    <p><strong>Tracking</strong>:</p>
+                    <ol>
+                        <li>Each task completion records timestamp</li>
+                        <li>Backend analyzes 14-30 day window</li>
+                        <li>Identifies peak completion hours</li>
+                        <li>Calculates optimal engagement hour</li>
+                    </ol>
+
+                    <p><strong>Decision Logic</strong>:</p>
+                    <ul>
+                        <li>14+ completions -> Use historical optimal hour</li>
+                        <li>
+                            New users -> Persona-based heuristic (e.g.,
+                            sprinters at 6am)
+                        </li>
+                        <li>Cached in Redis for fast lookup</li>
+                    </ul>
+
+                    <p><strong>Notification Timing</strong>:</p>
+                    <ul>
+                        <li>Scheduler runs every 60 seconds</li>
+                        <li>
+                            Sends within plus/minus 10 min of optimal hour, or
+                            2-hour catch-up window
+                        </li>
+                    </ul>
+
+                    <h3>3. Language Adaptation</h3>
+                    <p>All messaging adapts based on psychology profile:</p>
+                    <ul>
+                        <li>
+                            <strong>Shame sensitivity</strong> -> Tone
+                            adjustment (softer or direct)
+                        </li>
+                        <li>
+                            <strong>Confidence level</strong> -> Process-focused
+                            vs. outcome-focused
+                        </li>
+                        <li>
+                            <strong>Rumination tendency</strong> ->
+                            Action-oriented vs. reflective
+                        </li>
+                        <li>
+                            <strong>Stimulation tolerance</strong> ->
+                            Celebration and animation intensity
+                        </li>
+                        <li>
+                            <strong>Attachment style</strong> -> Notification
+                            frequency and reassurance density
+                        </li>
+                        <li>
+                            <strong>Preferred pace</strong> -> Message tempo and
+                            complexity
+                        </li>
+                    </ul>
+                    <p>
+                        Messages validated against non-violent communication
+                        principles.
+                    </p>
+
+                    <h3>4. Task Difficulty Adaptation</h3>
+                    <p><strong>Adjustments</strong>:</p>
+                    <ul>
+                        <li>Completion rate 80%+ -> +15% difficulty</li>
+                        <li>
+                            Completion rate less than or equal to 40% -> -15%
+                            difficulty
+                        </li>
+                        <li>Rest energy phase -> -10% difficulty</li>
+                        <li>Peak energy phase -> +10% difficulty</li>
+                        <li>High rumination -> Lower task complexity</li>
+                    </ul>
+                    <p>
+                        <strong>Example</strong>: User with 85% completion rate,
+                        high rumination, in rest phase receives tasks 3
+                        difficulty points lower with simplified instructions.
+                    </p>
+                </section>
+
+                <section>
+                    <h2>Notification System</h2>
+                    <h3>Decision Flow</h3>
+                    <div class="mermaid-wrap">
+                        <div class="mermaid">
+                            flowchart TD
+                            A["Every 60s"] --> B["For each user"]
+                            B --> C["Resolve timezone"]
+                            C --> D["Get optimal hour"]
+                            D --> E{"In send window?"}
+                            E -->|Yes| F["Pick top task"]
+                            E -->|No| Z["Skip cycle"]
+                            F --> G{"User tier"}
+                            G -->|Pro| H["AI body"]
+                            G -->|Free| I["Template + modifiers"]
+                            H --> J["Phrase validation"]
+                            I --> J
+                            J --> K["Send FCM"]
+                            K --> L["Log event"]
+                        </div>
+                    </div>
+                    <p>
+                        Same task definition receives different messaging based
+                        on user psychology: tone, complexity, and motivational
+                        framing all adapt.
+                    </p>
+                </section>
+
+                <section>
+                    <h2>RevenueCat Integration</h2>
+
+                    <h3>Tiers</h3>
+                    <p>
+                        <strong>Free</strong>: 3 goals, persona selection,
+                        template notifications, basic analytics
+                    </p>
+                    <p>
+                        <strong>Pro ($6.99/month)</strong>: Unlimited goals,
+                        8-dimension quiz, AI notifications, weekly insights,
+                        advanced analytics
+                    </p>
+
+                    <h3>Implementation</h3>
+                    <p><strong>Client</strong>:</p>
+                    <ul>
+                        <li>SDK initialized on launch</li>
+                        <li>User ID linked to RevenueCat</li>
+                        <li>
+                            Check <code>isPro()</code> before feature access
+                        </li>
+                        <li>Present native paywall (iOS/Google Play)</li>
+                    </ul>
+
+                    <p><strong>Backend</strong>:</p>
+                    <ul>
+                        <li>Webhook receives subscription events</li>
+                        <li>
+                            Validates <code>X-Revenuecat-Secret</code> header
+                        </li>
+                        <li>
+                            Updates <code>subscription_tier</code> in MongoDB
+                        </li>
+                        <li>
+                            Pro endpoints return 402 (Payment Required) for free
+                            users
+                        </li>
+                        <li>
+                            <code>/billing/refresh</code> syncs subscription
+                            status
+                        </li>
+                    </ul>
+
+                    <p>
+                        <strong>Revenue Model</strong>: $6.99/mo x 15-20%
+                        conversion = $16.8K-$50.3K Year 1 ARR (200-600 paying
+                        users)
+                    </p>
+                </section>
+
+                <section>
+                    <h2>Core Algorithms</h2>
+                    <h3>Streak Calculation</h3>
+                    <p>
+                        Count backwards from today. Each day with 1+ completed
+                        task adds to streak. First gap stops count. (Example:
+                        Mon-Thu completed, Fri missed = 4-day streak)
+                    </p>
+
+                    <h3>Milestone Progress</h3>
+                    <p>
+                        For each milestone:
+                        <code>progress = completed_tasks / total_tasks</code>.
+                        At 100%, celebrate.
+                    </p>
+
+                    <h3>Task Priority</h3>
+                    <p>
+                        Sort by: Status (pending &gt; completed) -> Priority
+                        field (0-3) -> Difficulty (easier first)
+                    </p>
+                </section>
+
+                <section>
+                    <h2>Deployment</h2>
+                    <h3>Backend</h3>
+                    <ul>
+                        <li>Docker image built from FastAPI app</li>
+                        <li>Pushed to Google Artifact Registry</li>
+                        <li>
+                            Deployed to Cloud Run (serverless, auto-scaling)
+                        </li>
+                        <li>
+                            Environment variables: MongoDB URI, Redis URL, API
+                            keys
+                        </li>
+                        <li>Zero-downtime rolling updates</li>
+                    </ul>
+
+                    <h3>Database</h3>
+                    <ul>
+                        <li>
+                            MongoDB Atlas (cloud-managed, auto-scaling,
+                            geo-redundant)
+                        </li>
+                        <li>Indexes on user_id, created_at, status</li>
+                    </ul>
+
+                    <h3>Cache</h3>
+                    <ul>
+                        <li>
+                            Redis Cloud (optimal engagement times, task
+                            suggestions, rate limits)
+                        </li>
+                        <li>24-hour TTL on most keys</li>
+                    </ul>
+
+                    <h3>CI/CD</h3>
+                    <p>GitHub Actions workflow:</p>
+                    <ol>
+                        <li>Push to <code>main</code></li>
+                        <li>Run tests</li>
+                        <li>Build + push Docker image</li>
+                        <li>Deploy to Cloud Run</li>
+                        <li>Smoke tests</li>
+                        <li>Auto-rollback on failure</li>
+                    </ol>
+                    <p>
+                        <strong>Result</strong>: Code to production in 5-10
+                        minutes.
+                    </p>
+                </section>
+
+                <section>
+                    <h2>Security</h2>
+                    <h3>Authentication</h3>
+                    <ol>
+                        <li>User signs up/logs in</li>
+                        <li>
+                            Backend generates JWT tokens:
+                            <ul>
+                                <li>
+                                    <code>access_token</code> (15 min, in
+                                    Authorization header)
+                                </li>
+                                <li>
+                                    <code>refresh_token</code> (7 days, secure
+                                    storage)
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            Access token in RAM; refresh token in
+                            Keychain/Keystore
+                        </li>
+                        <li>
+                            On 401, client calls <code>/auth/refresh</code> ->
+                            new access token -> retry (seamless)
+                        </li>
+                        <li>On logout, clear tokens and revoke FCM token</li>
+                    </ol>
+
+                    <h3>OAuth</h3>
+                    <ul>
+                        <li>Google: Verify via google-auth library</li>
+                        <li>Apple: Fetch JWKS, verify signature</li>
+                        <li>Token exchange server-side only</li>
+                    </ul>
+
+                    <h3>Data Protection</h3>
+                    <ul>
+                        <li>Passwords: Argon2 hashing</li>
+                        <li>In transit: HTTPS only</li>
+                        <li>At rest: MongoDB Atlas encryption</li>
+                        <li>
+                            No logging of passwords, tokens, or personal data
+                        </li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Architectural Decisions</h2>
+                    <p>
+                        <strong>Why Riverpod?</strong> Type-safe state with
+                        built-in caching and dependency injection.
+                    </p>
+                    <p>
+                        <strong>Why MongoDB?</strong> Flexible schema for
+                        evolving psychology profiles. Nested documents match our
+                        data model. Horizontal scaling via sharding.
+                    </p>
+                    <p>
+                        <strong>Why Async?</strong> FastAPI handles thousands of
+                        concurrent users. Notification scheduler runs without
+                        blocking. I/O operations do not block requests.
+                        Cost-effective on serverless.
+                    </p>
+                    <p>
+                        <strong>Why Cloud Run?</strong> No infrastructure
+                        management. Auto-scales 0 to thousands. Pay per request.
+                        Automatic deployments. Easy rollback.
+                    </p>
+                </section>
+
+                <section>
+                    <h2>Conclusion</h2>
+                    <p>
+                        Sparcd's architecture prioritizes personalization at
+                        scale. The psychology engine continuously adapts task
+                        difficulty, notification timing, and language based on
+                        individual profiles. RevenueCat enables sustainable
+                        monetization with clear Free/Pro separation. The
+                        cloud-native backend ensures reliability and scalability
+                        without infrastructure overhead.
+                    </p>
+                    <p>
+                        The system is production-ready with comprehensive error
+                        handling, secure authentication, and monitoring for
+                        observability.
+                    </p>
+                </section>
+            </main>
+        </div>
+    </body>
 </html>

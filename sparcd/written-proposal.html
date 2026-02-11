@@ -1,159 +1,1174 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Sparcd Written Proposal</title>
-  <style>
-    :root {
-      --bg: #f6f8fc;
-      --card: #ffffff;
-      --ink: #1f2937;
-      --muted: #475569;
-      --line: #dbe3ef;
-      --accent: #0f766e;
-    }
-    body {
-      margin: 0;
-      background: var(--bg);
-      color: var(--ink);
-      font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
-      line-height: 1.6;
-    }
-    main {
-      max-width: 920px;
-      margin: 34px auto;
-      padding: 0 18px;
-    }
-    article {
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      padding: 28px;
-    }
-    h1, h2 { margin: 0 0 12px; }
-    h1 { font-size: 1.9rem; }
-    h2 {
-      margin-top: 24px;
-      font-size: 1.15rem;
-      color: var(--accent);
-      letter-spacing: 0.01em;
-    }
-    p { margin: 10px 0; }
-    ul { margin: 8px 0; padding-left: 20px; }
-    li { margin: 6px 0; }
-    .meta {
-      color: var(--muted);
-      font-size: 0.95rem;
-    }
-    .badge {
-      display: inline-block;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      padding: 4px 10px;
-      margin-right: 8px;
-      font-size: 0.85rem;
-      color: var(--muted);
-    }
-    .highlight {
-      border-left: 4px solid var(--accent);
-      padding: 8px 12px;
-      background: #f8fcfb;
-      border-radius: 6px;
-      margin: 14px 0;
-    }
-  </style>
-</head>
-<body>
-  <main>
-    <article>
-      <h1>Sparcd Written Proposal</h1>
-      <p class="meta"><strong>Focus:</strong> Problem, Target Audience, Monetization Strategy</p>
-      <p>
-        <span class="badge">Behavioral Psychology</span>
-        <span class="badge">AI Personalization</span>
-        <span class="badge">Execution Infrastructure</span>
-      </p>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Written Proposal</title>
+        <style>
+            :root {
+                --bg: #f5f5f5;
+                --paper: #ffffff;
+                --ink: #121212;
+                --muted: #666666;
+                --line: #dedede;
+                --line-strong: #cccccc;
+                --turquoise: #00666c;
+                --coral: #c65d52;
+                --orange: #ec935e;
+                --turquoise-soft: rgba(0, 102, 108, 0.07);
+            }
 
-      <h2>1) PROBLEM</h2>
-      <p>The world does not have an ambition shortage. It has an execution shortage.</p>
-      <p>
-        People already know what they want: get fit, transition careers, build side income,
-        learn new skills, and complete meaningful life goals. What fails is daily conversion
-        from intention into action.
-      </p>
-      <p>
-        Most productivity products stop at planning and tracking. They assume users can self-plan
-        perfectly, self-motivate consistently, and self-recover quickly after misses.
-        Real behavior does not work that way. Friction compounds. Momentum breaks. Restart gets harder.
-      </p>
-      <div class="highlight">
-        Sparcd treats follow-through as a system design problem, not a motivation problem.
-      </div>
+            * {
+                box-sizing: border-box;
+            }
 
-      <h2>2) TARGET AUDIENCE</h2>
-      <p>
-        Sparcd is built for high-intent users with inconsistent execution. The initial wedge is women
-        in Gabby's community, where we observed a clear pattern: strong ambition, clear goals,
-        and a missing daily execution layer.
-      </p>
-      <ul>
-        <li><strong>Primary user profile:</strong> motivated adults who feel overwhelmed when goals become operational.</li>
-        <li><strong>Behavior profile:</strong> high aspiration, uneven consistency, repeated restart cycles.</li>
-        <li><strong>Core use cases:</strong> fitness, upskilling, career transitions, travel planning, and habit formation.</li>
-      </ul>
-      <p>
-        Long-term expansion is broad: any segment where the bottleneck is execution friction rather than idea generation.
-      </p>
+            html,
+            body {
+                margin: 0;
+                padding: 0;
+            }
 
-      <h2>How Sparcd Solves This</h2>
-      <p>
-        Sparcd is an AI-powered execution layer that transforms goals into a personalized, adaptive system users can sustain.
-        Instead of static plans, users get structured journeys with milestone logic and daily actions sized for completion.
-      </p>
-      <ul>
-        <li><strong>Micro-action design:</strong> tiny, clear actions reduce activation energy and increase daily completion probability.</li>
-        <li><strong>Persona personalization:</strong> pacing and framing adapt to user style (Explorer, Perfectionist, People Pleaser, Overthinker, Sprinter, Dreamer).</li>
-        <li><strong>Two-phase planning engine:</strong> goal analysis followed by milestone-based journey generation for stronger structure and relevance.</li>
-        <li><strong>Adaptive recovery:</strong> when users skip or stall, upcoming tasks are regenerated at lower friction instead of leaving users stuck.</li>
-        <li><strong>Reinforcement loops:</strong> celebration, streaks, and visible progress strengthen consistency.</li>
-        <li><strong>Action Links:</strong> select tasks include direct links to trusted external resources so users can execute immediately.</li>
-        <li><strong>Grounded guidance:</strong> recommendations are grounded to real-world resources, reducing vague AI output.</li>
-      </ul>
-      <p>
-        Product thesis: adherence is a design outcome. If the next step is clear, small, personalized,
-        and rewarding, users move from occasional motivation to compounding execution.
-      </p>
+            body {
+                font-family:
+                    -apple-system, BlinkMacSystemFont, "SF Pro Text",
+                    "Helvetica Neue", Helvetica, Arial, sans-serif;
+                color: var(--ink);
+                background: var(--bg);
+                line-height: 1.6;
+            }
 
-      <h2>3) MONETIZATION STRATEGY</h2>
-      <p>
-        Sparcd uses a freemium subscription model with a clear value ladder from utility to outcomes.
-      </p>
-      <ul>
-        <li><strong>Free tier:</strong> core planning, daily actions, baseline reminders, and progress tracking.</li>
-        <li><strong>Pro tier:</strong> deeper personalization, optimized notification timing, richer guidance, and advanced adaptive capabilities.</li>
-      </ul>
-      <p>
-        Monetization is implemented through RevenueCat with entitlement-based backend gating and native mobile purchase flows.
-        This enables fast packaging/price iteration while preserving deterministic feature access.
-      </p>
-      <p>
-        Users upgrade for one reason: better follow-through outcomes. The paid tier improves consistency,
-        reduces restart friction, and increases confidence that goals actually move forward each day.
-      </p>
+            .page-shell {
+                max-width: 980px;
+                margin: 0 auto;
+                padding: 28px 18px 56px;
+            }
 
-      <h2>Monetization Logic</h2>
-      <ul>
-        <li><strong>Clear value ladder:</strong> free builds habit, Pro improves results.</li>
-        <li><strong>Daily habit loop:</strong> high-frequency engagement supports retention and subscription durability.</li>
-        <li><strong>Personalization flywheel:</strong> more usage improves adaptation quality and perceived paid value.</li>
-        <li><strong>Category expansion:</strong> the same execution engine scales across health, career, learning, and planning.</li>
-      </ul>
-      <div class="highlight">
-        Strategic direction: build the default execution platform for personal goals,
-        where AI is measured by real-world follow-through, not content generation alone.
-      </div>
-    </article>
-  </main>
-</body>
+            .hero {
+                background: var(--paper);
+                color: var(--ink);
+                border: 1px solid var(--line-strong);
+                border-top: 2px solid var(--turquoise);
+                border-radius: 12px;
+                padding: 24px 22px;
+                display: grid;
+                gap: 16px;
+            }
+
+            .hero::after {
+                content: none;
+            }
+
+            h1,
+            h2,
+            h3,
+            h4 {
+                margin: 0;
+                font-family:
+                    -apple-system, BlinkMacSystemFont, "SF Pro Display",
+                    "Helvetica Neue", Helvetica, Arial, sans-serif;
+                line-height: 1.25;
+                letter-spacing: 0;
+            }
+
+            h1 {
+                font-size: clamp(1.65rem, 2.2vw, 2.15rem);
+                font-weight: 600;
+                margin-bottom: 6px;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+                color: var(--muted);
+                margin-bottom: 0;
+                max-width: 68ch;
+            }
+
+            .hero-main {
+                display: grid;
+                gap: 8px;
+            }
+
+            .hero-meta {
+                border-top: 1px solid var(--line);
+                padding-top: 12px;
+            }
+
+            .meta-grid {
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+
+            .meta-chip {
+                background: transparent;
+                border: 1px solid var(--line);
+                border-radius: 8px;
+                padding: 10px 11px;
+                font-size: 0.92rem;
+                text-align: left;
+            }
+
+            .meta-chip strong {
+                color: var(--turquoise);
+                font-weight: 600;
+            }
+
+            .layout {
+                display: grid;
+                gap: 12px;
+                margin-top: 12px;
+            }
+
+            section {
+                background: var(--paper);
+                border: 1px solid var(--line);
+                border-radius: 12px;
+                padding: 22px 20px;
+            }
+
+            h2 {
+                color: var(--turquoise);
+                margin-bottom: 10px;
+                font-size: clamp(1.15rem, 1.5vw, 1.38rem);
+                font-weight: 600;
+            }
+
+            h3 {
+                margin-top: 18px;
+                margin-bottom: 8px;
+                color: var(--ink);
+                font-size: 1.03rem;
+                font-weight: 600;
+            }
+
+            h4 {
+                margin-top: 14px;
+                margin-bottom: 6px;
+                color: var(--ink);
+                font-size: 0.98rem;
+                font-weight: 600;
+            }
+
+            p {
+                margin: 0 0 10px;
+                color: var(--ink);
+            }
+
+            ul,
+            ol {
+                margin: 0 0 14px;
+                padding-left: 21px;
+            }
+
+            li {
+                margin: 6px 0;
+            }
+
+            .callout {
+                border-left: 3px solid var(--coral);
+                background: #fafafa;
+                border-radius: 8px;
+                padding: 12px 14px;
+                margin: 10px 0 14px;
+            }
+
+            hr {
+                border: none;
+                border-top: 1px solid var(--line);
+                margin: 18px 0;
+            }
+
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-top: 10px;
+                font-size: 0.95rem;
+                overflow: hidden;
+                border-radius: 10px;
+                border: 1px solid var(--line);
+            }
+
+            th,
+            td {
+                border-bottom: 1px solid var(--line);
+                padding: 11px 12px;
+                vertical-align: top;
+                text-align: left;
+            }
+
+            th {
+                background: var(--turquoise-soft);
+                color: var(--turquoise);
+                font-weight: 600;
+            }
+
+            tr:nth-child(even) td {
+                background: #fcfcfc;
+            }
+
+            .kpi-row {
+                display: grid;
+                gap: 10px;
+                grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+                margin: 12px 0;
+            }
+
+            .kpi {
+                border-radius: 10px;
+                border: 1px solid var(--line);
+                background: var(--paper);
+                padding: 12px;
+            }
+
+            .kpi strong {
+                display: block;
+                color: var(--turquoise);
+                margin-bottom: 4px;
+                font-size: 0.85rem;
+                letter-spacing: 0.02em;
+                text-transform: none;
+            }
+
+            .footnote {
+                font-size: 0.9rem;
+                color: var(--muted);
+            }
+
+            @media (max-width: 760px) {
+                .page-shell {
+                    padding: 20px 14px 40px;
+                }
+
+                .hero {
+                    padding: 18px 16px 16px;
+                    gap: 10px;
+                }
+
+                .meta-grid {
+                    grid-template-columns: 1fr;
+                }
+
+                section {
+                    padding: 19px 16px;
+                    border-radius: 10px;
+                }
+
+                table,
+                thead,
+                tbody,
+                th,
+                td,
+                tr {
+                    display: block;
+                }
+
+                thead {
+                    display: none;
+                }
+
+                tr {
+                    border-bottom: 1px solid var(--line);
+                }
+
+                td {
+                    border: none;
+                    padding: 9px 8px;
+                }
+
+                td::before {
+                    content: attr(data-label);
+                    display: block;
+                    font-weight: 600;
+                    color: var(--turquoise);
+                    margin-bottom: 2px;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="page-shell">
+            <header class="hero">
+                <div class="hero-main">
+                    <h1>Written Proposal</h1>
+                    <p class="hero-subtitle">
+                        Psychology-informed goal achievement platform for women
+                        seeking personal growth and lifestyle transformation.
+                    </p>
+                </div>
+                <div class="hero-meta">
+                    <div class="meta-grid">
+                        <div class="meta-chip">
+                            <strong>Product:</strong> Sparcd —
+                            Psychology-Informed Goal Achievement Platform
+                            <br />
+                            <strong>Target Market:</strong> Women seeking
+                            personal growth &amp; lifestyle transformation
+                            <br />
+                            <strong>Monetization:</strong> Freemium subscription
+                            model via RevenueCat
+                            <br />
+                            <strong>Status:</strong> MVP Complete, Ready for
+                            Market
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <main class="layout">
+                <section>
+                    <h2>Executive Summary</h2>
+                    <p>
+                        Sparcd solves a critical problem: the
+                        inspiration-to-action gap. Women with ambitious
+                        goals—career advancement, health transformation,
+                        creative pursuits, financial independence—often get
+                        stuck between inspiration and execution.
+                    </p>
+
+                    <p>
+                        <strong>The Problem:</strong> The gap between
+                        inspiration and action is real. Women with ambitious
+                        goals often find themselves stuck because large,
+                        abstract objectives feel overwhelming and paralyzing.
+                        When they do start, they face a familiar pattern:
+                        complexity creates friction, missed days trigger shame
+                        spirals, and one broken streak becomes a reason to quit
+                        entirely. Generic apps treat all users the same,
+                        ignoring the fact that a perfectionist's path looks
+                        different from a sprinter's, and high-shame-sensitivity
+                        users need softer language when they stumble. Without
+                        personalized support that understands their psychology,
+                        progress stalls—not from lack of motivation, but from
+                        misalignment between the goal, the person, and the
+                        approach.
+                    </p>
+
+                    <p>
+                        <strong>Our Solution:</strong> Sparcd transforms goals
+                        into daily micro-actions powered by 10 evidence-based
+                        behavioral psychology frameworks. Users:
+                    </p>
+                    <ul>
+                        <li>Break ambitious goals into 2-minute daily tasks</li>
+                        <li>Build streaks and identity-based consistency</li>
+                        <li>
+                            Receive personalized motivation grounded in
+                            psychology
+                        </li>
+                        <li>
+                            Celebrate wins with ethical, dopamine-friendly
+                            gamification
+                        </li>
+                        <li>
+                            Unlock advanced features (trait customization,
+                            weekly insights, AI notifications) via Pro
+                            subscription
+                        </li>
+                    </ul>
+
+                    <p><strong>Market Opportunity:</strong></p>
+                    <ul>
+                        <li>
+                            <strong>TAM:</strong> Habit-tracking &amp; goal
+                            achievement apps market valued at
+                            <strong
+                                >$1.9B (2025), growing to $5.5B by 2033</strong
+                            >
+                            at 14.2% CAGR. Broader wellness apps (including goal
+                            achievement) reach
+                            <strong
+                                >$12.87B (2025), expanding to $45.65B by
+                                2034</strong
+                            >. Women's health &amp; wellness apps specifically:
+                            <strong
+                                >$4.30B (2025), growing to $19.88B by
+                                2034</strong
+                            >
+                            at 18.66% CAGR [Straits Research, Grand View
+                            Research, Precedence Research]
+                        </li>
+                        <li>
+                            <strong>SAM:</strong> Women 25-45 seeking personal
+                            growth &amp; goal achievement in North America +
+                            English-speaking markets. US women's wellness app
+                            market alone:
+                            <strong
+                                >$1.24B (2025), projected $5.75B by 2034</strong
+                            >. Women's personal development market:
+                            <strong
+                                >$53.24B (2025), growing to $86.54B by
+                                2034</strong
+                            >
+                            at 5.55% CAGR [Multiple sources]
+                        </li>
+                        <li>
+                            <strong>SOM:</strong> Conservative year 1-3:
+                            500-2,000 paying subscribers Y1 ($120K-960K ARR) →
+                            5,000-15,000 Y2 ($1.2M-7.2M) → 15,000-40,000 Y3
+                            ($3.6M-19.2M). Optimistic with influencer/viral
+                            growth: $1M-4M Y1, $6M-16M Y2, $16M-40M Y3
+                        </li>
+                        <li>
+                            <strong>Monetization:</strong> Freemium model,
+                            $6.99/month Pro tier, targeting 15-20% conversion
+                            with 95% annual retention (top-quartile performance)
+                        </li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Problem Statement</h2>
+                    <h3>The Motivation-Execution Gap</h3>
+                    <p>
+                        Research consistently shows that goals fail not due to
+                        lack of desire, but due to:
+                    </p>
+                    <ol>
+                        <li>
+                            <strong>Cognitive Overload:</strong> Large goals are
+                            abstract, unmeasurable, and paralyzing
+                            <ul>
+                                <li>"Get healthy" feels impossible</li>
+                                <li>"Write a novel" has no clear first step</li>
+                                <li>
+                                    Women are disproportionately affected by
+                                    decision fatigue (Nagoski, <em>Burnout</em>)
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>Broken Streak Effect:</strong> One missed
+                            day kills momentum
+                            <ul>
+                                <li>
+                                    Users see streak break and abandon entirely
+                                    (sunk-cost fallacy)
+                                </li>
+                                <li>
+                                    No reframing of setback as recovery
+                                    opportunity
+                                </li>
+                                <li>Shame and guilt prevent comeback</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>One-Size-Fits-All Approach:</strong> Generic
+                            task apps ignore psychology
+                            <ul>
+                                <li>
+                                    A perfectionist needs permission to "good
+                                    enough"; a sprinter needs quick wins
+                                </li>
+                                <li>
+                                    High-shame-sensitivity users need softened
+                                    language on failures
+                                </li>
+                                <li>
+                                    Overthinkers need action-first framing to
+                                    break analysis paralysis
+                                </li>
+                                <li>
+                                    Current apps treat all users identically
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>Isolation:</strong> Accountability is weak
+                            without community connection
+                            <ul>
+                                <li>
+                                    Other apps often have social leaderboards
+                                    (gamified shame)
+                                </li>
+                                <li>
+                                    Sparcd emphasizes identity evidence and
+                                    streak resilience instead
+                                </li>
+                                <li>
+                                    Personal psychological support, not public
+                                    ranking
+                                </li>
+                            </ul>
+                        </li>
+                    </ol>
+
+                    <h3>Target Market Validation</h3>
+                    <h4>Gabby Beckford's Community:</h4>
+                    <ul>
+                        <li>2M+ Instagram followers, heavily women (85%+)</li>
+                        <li>Age profile: 25-55, peak 25-40</li>
+                        <li>
+                            Psychographic: Ambitious, personally growth-focused,
+                            proven budget for transformation tools (workshops
+                            $50-500+/year)
+                        </li>
+                        <li>
+                            Pain point: Overcommitment, burnout, inspiration
+                            without execution
+                        </li>
+                        <li>
+                            Community engagement: High—existing audience pays
+                            premium for retreats, courses, coaching
+                        </li>
+                    </ul>
+
+                    <h4>Market Adoption Signals:</h4>
+                    <ul>
+                        <li>
+                            Women's app adoption rates: 50% of women 18-45 use
+                            mobile tracking/guidance apps (up from 35% in 2018)
+                        </li>
+                        <li>
+                            Health/fitness premium adoption: 36% of
+                            habit-tracking downloads are premium subscriptions
+                        </li>
+                        <li>
+                            Women's health app growth: Leading wellness category
+                            with 18.66% CAGR
+                        </li>
+                        <li>
+                            Top-quartile retention: Psychology-informed apps
+                            achieve 25%+ D30 retention vs. 15-20% industry
+                            average
+                        </li>
+                        <li>
+                            Willingness to pay: 71% of women users willing to
+                            pay for premium wellness features
+                        </li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Solution: Sparcd</h2>
+                    <h3>Core Features</h3>
+
+                    <h4>
+                        1. Psychology-Informed Personalization (Core Innovation)
+                    </h4>
+                    <p>
+                        <strong>Persona Selection</strong> (available for all
+                        users):
+                    </p>
+                    <p>
+                        All users select from 6 personas (explorer,
+                        perfectionist, people_pleaser, overthinker, sprinter,
+                        dreamer) to shape how goals are presented and tasks are
+                        designed. This guides the AI analysis and notification
+                        tone.
+                    </p>
+
+                    <p><strong>Trait Fine-Tuning</strong> (Pro feature):</p>
+                    <p>
+                        Pro users unlock an 8-dimension psychology profile that
+                        personalizes every interaction:
+                    </p>
+                    <ul>
+                        <li>
+                            Mindset layer: growth vs. fixed (affects praise
+                            style), confidence (task difficulty), stress frame
+                            (rest-task insertion)
+                        </li>
+                        <li>
+                            Processing style: rumination tendency (task
+                            complexity, action-first framing), stimulation
+                            tolerance (celebration intensity), preferred pace
+                            (task volume &amp; spacing)
+                        </li>
+                        <li>
+                            Attachment &amp; motivation: attachment style
+                            (notification frequency &amp; reassurance),
+                            reassurance needs (feedback density), feedback
+                            frequency preference
+                        </li>
+                        <li>
+                            Failure response: self-compassion score, shame
+                            sensitivity (softens all miss/failure messaging),
+                            recovery pattern (comeback vs. rest routing)
+                        </li>
+                    </ul>
+
+                    <p><strong>How it Works:</strong></p>
+                    <ul>
+                        <li>Free users get persona-based defaults</li>
+                        <li>
+                            Pro users submit a trait quiz (2-3 min) that builds
+                            an 8-dimensional profile
+                        </li>
+                        <li>
+                            Profile drives: task difficulty scaling,
+                            notification tone (shame-sensitive language
+                            filtering), celebration intensity, rest-day
+                            insertion
+                        </li>
+                        <li>
+                            We also collect personal information (age, gender,
+                            occupation, life context) to inform anchor moment
+                            suggestions and life-stage-appropriate task design
+                        </li>
+                        <li>
+                            System notifies users at optimal engagement times
+                            (tracked from behavior) with tone matched to their
+                            psychology profile
+                        </li>
+                    </ul>
+
+                    <p>
+                        <strong>Outcome:</strong> Personalization at scale
+                        without complexity—free users get immediate value, Pro
+                        users unlock the full psychology engine.
+                    </p>
+
+                    <h4>2. Micro-Actions Engine</h4>
+                    <p>
+                        Transforms ambitious goals into daily 2-5 minute tasks:
+                    </p>
+                    <ul>
+                        <li>
+                            <strong>Fogg's B=MAP Model:</strong> Each task has
+                            anchor moment ("after morning coffee"), tiny
+                            version, and celebration
+                        </li>
+                        <li>
+                            <strong>Ability Factors:</strong> Tasks scored on
+                            simplicity (time, effort, brain cycles, money,
+                            routine)
+                        </li>
+                        <li>
+                            <strong>Interactive Journey Map</strong> (Pro
+                            feature): Goals have 3-7 milestones with 21-30
+                            pre-generated tasks in a visual journey. Users see
+                            an interactive path visualization showing:
+                            <ul>
+                                <li>
+                                    Current milestone progress (visual winding
+                                    path with nodes)
+                                </li>
+                                <li>Milestones ahead (visible but upcoming)</li>
+                                <li>
+                                    Task reveal schedule (tasks unlock daily,
+                                    maintaining momentum without overwhelm)
+                                </li>
+                                <li>
+                                    Ability to "get ahead"—if today 100%
+                                    complete, unlock tomorrow's tasks early
+                                    (motivation lever for ambitious users)
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <h4>3. Ethical Gamification</h4>
+                    <p>
+                        <strong>Streaks:</strong> Track consistency without
+                        shame
+                    </p>
+                    <ul>
+                        <li>Streak-at-risk messaging is sensitivity-tuned</li>
+                        <li>
+                            Comeback feature: Missing a day doesn't break
+                            motivation
+                        </li>
+                    </ul>
+
+                    <p>
+                        <strong>Identity Evidence Wall:</strong> Accumulate "I
+                        am someone who..." statements
+                    </p>
+                    <ul>
+                        <li>Clear's atomic habits approach</li>
+                        <li>
+                            Celebrates identity shift, not point accumulation
+                        </li>
+                        <li>Dopamine-friendly without leaderboard shame</li>
+                    </ul>
+
+                    <p>
+                        <strong>Celebration Overlay:</strong> Adaptive
+                        celebration animations
+                    </p>
+                    <ul>
+                        <li>
+                            Low-stimulation users: Gentle scale animation
+                            (200ms)
+                        </li>
+                        <li>
+                            High-stimulation users: Confetti, scale, bounce
+                            (350ms)
+                        </li>
+                        <li>
+                            Tied to streak milestones (3-day, 7-day, 30-day
+                            recognition)
+                        </li>
+                    </ul>
+
+                    <h4>4. AI-Powered Personalization (Pro Feature)</h4>
+                    <ul>
+                        <li>
+                            <strong>Goal Analysis:</strong> AI analyzes goals
+                            through 10 psychology frameworks
+                            <ul>
+                                <li>
+                                    Identity alignment: "You're a perfectionist
+                                    → permission to imperfect first step"
+                                </li>
+                                <li>
+                                    Predicted obstacles: Reframed with
+                                    self-compassion, not blame
+                                </li>
+                                <li>
+                                    Personalized anchor moments: Tailored to
+                                    lifestyle &amp; persona
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>Smart Notifications:</strong> Personalized
+                            task reminders matched to user psychology
+                            <ul>
+                                <li>
+                                    Free: Template notifications + psychology
+                                    modifiers (shame sensitivity, attachment
+                                    style, etc.)
+                                </li>
+                                <li>
+                                    Pro: AI generates personalized reminder body
+                                    per notification
+                                </li>
+                                <li>
+                                    Timing: Optimal engagement hour (tracked
+                                    from completion history) + 2-hour catch-up
+                                    window (timezone-aware)
+                                </li>
+                                <li>
+                                    Tone: Adjusted based on shame sensitivity,
+                                    attachment style, energy phase, and recovery
+                                    pattern
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>Weekly Insights</strong> (Pro): 7-day stats
+                            with personalized reflection
+                            <ul>
+                                <li>
+                                    Pattern recognition: "You complete 5/7 days
+                                    in focused sprints. Your energy peaks
+                                    mid-week."
+                                </li>
+                                <li>
+                                    Behavior-based coaching: Suggestions from
+                                    your actual completion patterns, not generic
+                                    advice
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <h4>5. Notification Strategy (Without Interruption)</h4>
+                    <ul>
+                        <li>
+                            <strong>One task per day</strong> (non-intrusive)
+                        </li>
+                        <li>
+                            <strong
+                                >Scheduled to optimal engagement hour</strong
+                            >
+                            (based on user's historical completion times)
+                        </li>
+                        <li>
+                            <strong>Action buttons on push:</strong> Snooze,
+                            Pause, Resume, Dismiss (no app open required)
+                        </li>
+                        <li>
+                            <strong>Sensitive to shame-resilience:</strong>
+                            High-shame users get softer language
+                        </li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Business Model</h2>
+                    <h3>Freemium Subscription (Via RevenueCat)</h3>
+
+                    <h4>Free Tier</h4>
+                    <ul>
+                        <li>3 active goals at once</li>
+                        <li>3 goal creations per month</li>
+                        <li>
+                            Basic persona selection (6 types, no trait
+                            customization)
+                        </li>
+                        <li>Daily micro-actions with template notifications</li>
+                        <li>Streaks &amp; identity evidence tracking</li>
+                        <li>
+                            Basic analytics (today's progress, streak count)
+                        </li>
+                    </ul>
+                    <p>
+                        <strong>Conversion driver:</strong> Trait customization
+                        (most users want to understand themselves better)
+                    </p>
+
+                    <h4>Pro Tier ($6.99/month)</h4>
+                    <ul>
+                        <li>Unlimited active goals</li>
+                        <li>Unlimited goal creations per month</li>
+                        <li>
+                            <strong>Trait Customization:</strong> Take
+                            8-dimension quiz, view psychology profile summary
+                        </li>
+                        <li>
+                            <strong>AI Goal Analysis:</strong> Gemini analyzes
+                            goals, recommends personalized strategy
+                        </li>
+                        <li>
+                            <strong>AI Notifications:</strong> Personalized
+                            reminder body (not templates)
+                        </li>
+                        <li>
+                            <strong>Weekly Insights:</strong> 7-day review with
+                            personalized reflection (pro-gated)
+                        </li>
+                        <li>
+                            <strong>Advanced Analytics:</strong> Goal history,
+                            completion trends, psychology impact on success
+                        </li>
+                    </ul>
+
+                    <h4>Conversion funnel</h4>
+                    <ol>
+                        <li>
+                            User creates 4th goal → "Upgrade to Pro for
+                            unlimited goals"
+                        </li>
+                        <li>
+                            User completes 7-day streak → "Unlock trait
+                            customization and personalized insights with Pro"
+                        </li>
+                        <li>
+                            Free trial during trait quiz → convert to paid Pro
+                        </li>
+                    </ol>
+
+                    <h4>Financial Projections (Realistic)</h4>
+                    <p>
+                        <strong>Realistic Year 1-2 Revenue</strong> (benchmarked
+                        against actual health/wellness app performance):
+                    </p>
+
+                    <div class="kpi-row">
+                        <div class="kpi">
+                            <strong>Year 1</strong>
+                            Downloads (with Gabby's 800K followers + organic):
+                            15K-25K
+                            <br />Day 30 retention: 1K-2K active users
+                            <br />Paying Pro subscribers: 200-600 (3-5% of
+                            active users) <br />ARR: $24K-$72K
+                        </div>
+                        <div class="kpi">
+                            <strong>Year 2</strong>
+                            With solid product-market fit + word-of-mouth
+                            growth: 3K-6K paying subscribers
+                            <br />ARR: $72K-$288K
+                        </div>
+                    </div>
+
+                    <h4>Key Performance Metrics</h4>
+                    <ul>
+                        <li>
+                            Day 30 Retention: Target 8-12% (health/fitness
+                            industry avg: 5-8%)
+                        </li>
+                        <li>
+                            Trial Conversion: Target 30-40% (freemium: 2-3%)
+                        </li>
+                        <li>
+                            Monthly Growth: 10-15% sustained growth (anything
+                            5%+ is healthy)
+                        </li>
+                        <li>Break-even: Month 18-24</li>
+                        <li>
+                            Profitability: Year 3 onwards (if retention
+                            improves)
+                        </li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Go-To-Market Strategy</h2>
+
+                    <h3>Phase 1: Soft Launch (Months 1-3)</h3>
+                    <ul>
+                        <li>
+                            <strong
+                                >Launch with Gabby Beckford's community:</strong
+                            >
+                            Exclusive early access with free 7-day trial for her
+                            email list (2M subscribers)
+                        </li>
+                        <li>
+                            <strong>Community validation:</strong> Beta user
+                            testimonials and transformation stories
+                        </li>
+                        <li>
+                            <strong>Referral seeding:</strong> Early adopters
+                            get 1 month free Pro for each successful referral
+                        </li>
+                    </ul>
+
+                    <h3>Phase 2: Growth &amp; Acquisition (Months 4-9)</h3>
+                    <ul>
+                        <li>
+                            <strong>Organic:</strong> Word-of-mouth, referral
+                            program, testimonial content
+                        </li>
+                        <li>
+                            <strong>Paid:</strong> Facebook/Instagram ads
+                            targeting women 25-45 interested in goal-setting and
+                            personal development
+                        </li>
+                        <li>
+                            <strong>Content:</strong> Identity evidence stories
+                            (anonymized), user success journeys, psychology
+                            framework education
+                        </li>
+                    </ul>
+
+                    <h3>Phase 3: Scale &amp; Expansion (Months 10-18)</h3>
+                    <ul>
+                        <li>
+                            <strong>Partnership expansion:</strong> Coaching
+                            platforms, wellness communities
+                        </li>
+                        <li>
+                            <strong>Platform expansion:</strong> Web dashboard,
+                            Apple Watch app
+                        </li>
+                        <li>
+                            <strong>Hint:</strong> Corporate wellness pilots
+                            (exploratory)
+                        </li>
+                    </ul>
+
+                    <div class="callout">
+                        <strong>Target:</strong> $40K-$80K ARR by end of Year 1
+                        (with sustainable 10-15% MoM growth)
+                    </div>
+                </section>
+
+                <section>
+                    <h2>Competitive Advantage</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Feature</th>
+                                <th>Sparcd</th>
+                                <th>Others</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td data-label="Feature">
+                                    <strong>Psychology-Informed Design</strong>
+                                </td>
+                                <td data-label="Sparcd">
+                                    ✓ (10 frameworks: Fogg, Clear, Dweck, Brown,
+                                    Nagoski, Northrup, Nolen-Hoeksema, Rubin,
+                                    Rosenberg, Michie)
+                                </td>
+                                <td data-label="Others">
+                                    ✗ (Others use gamification or
+                                    accountability, not comprehensive
+                                    psychology)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td data-label="Feature">
+                                    <strong
+                                        >8-Dimension Trait Fine-Tuning</strong
+                                    >
+                                </td>
+                                <td data-label="Sparcd">
+                                    ✓ (Pro feature with comprehensive profiling)
+                                </td>
+                                <td data-label="Others">
+                                    ✗ (All others treat users identically)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td data-label="Feature">
+                                    <strong
+                                        >NVC-Safe Messaging &amp;
+                                        Shame-Resilient Design</strong
+                                    >
+                                </td>
+                                <td data-label="Sparcd">
+                                    ✓ (Banned phrase filtering,
+                                    shame-sensitivity tuning)
+                                </td>
+                                <td data-label="Others">
+                                    ✗ (Generic or shame-inducing language)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td data-label="Feature">
+                                    <strong>AI Goal Analysis</strong>
+                                </td>
+                                <td data-label="Sparcd">
+                                    ✓ (Through 10 psychology frameworks)
+                                </td>
+                                <td data-label="Others">
+                                    ✗ (Others: minimal AI or
+                                    non-psychology-first implementations)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td data-label="Feature">
+                                    <strong>Micro-Actions / Mini-Habits</strong>
+                                </td>
+                                <td data-label="Sparcd">
+                                    ✓ (Fogg B=MAP: anchor, tiny version,
+                                    celebration)
+                                </td>
+                                <td data-label="Others">
+                                    Partial (Others support habits, but not
+                                    psychology-designed tasks)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td data-label="Feature">
+                                    <strong>Interactive Journey Map</strong>
+                                </td>
+                                <td data-label="Sparcd">
+                                    ✓ (Visual path with milestone progress &amp;
+                                    task reveals)
+                                </td>
+                                <td data-label="Others">
+                                    ✗ (Habit lists only)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td data-label="Feature">
+                                    <strong>Women-Focused</strong>
+                                </td>
+                                <td data-label="Sparcd">
+                                    ✓ (Primary target, psychology tuned to
+                                    women's needs)
+                                </td>
+                                <td data-label="Others">
+                                    ✗ (Most others are gender-neutral)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td data-label="Feature">
+                                    <strong>Gabby Beckford Partnership</strong>
+                                </td>
+                                <td data-label="Sparcd">
+                                    ✓ (Access to 2M+ aligned community)
+                                </td>
+                                <td data-label="Others">✗</td>
+                            </tr>
+                            <tr>
+                                <td data-label="Feature">
+                                    <strong>Ethical Gamification</strong>
+                                </td>
+                                <td data-label="Sparcd">
+                                    ✓ (Identity evidence, no leaderboards or
+                                    public shame)
+                                </td>
+                                <td data-label="Others">
+                                    Mixed (Others may include social pressure
+                                    mechanics; few are shame-resilient by
+                                    design)
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <p class="callout">
+                        <strong>Key Differentiator:</strong> Sparcd is the only
+                        goal app that combines 10 evidence-based psychology
+                        frameworks with personalized trait fine-tuning, designed
+                        specifically for women. Others either focus on
+                        gamification, habit formation alone, or
+                        accountability—none integrate comprehensive behavioral
+                        psychology.
+                    </p>
+                </section>
+
+                <section>
+                    <h2>Vision (18-24 Month Horizon)</h2>
+
+                    <h3>Year 1-2 Outcomes</h3>
+                    <ol>
+                        <li>
+                            <strong>Market Validation:</strong> 50K-70K users
+                            with 15%+ Pro conversion
+                        </li>
+                        <li>
+                            <strong>Community:</strong> Gabby Bernstein official
+                            partnership; Sparcd recommended in her ecosystem
+                        </li>
+                        <li>
+                            <strong>Profitability:</strong> Break-even by Month
+                            18; $200K+ monthly revenue by Month 24
+                        </li>
+                        <li>
+                            <strong>Expansion:</strong> Web app, Apple Watch
+                            app, enterprise pilots (corporate wellness)
+                        </li>
+                    </ol>
+
+                    <h3>Long-Term Vision</h3>
+                    <p>
+                        Sparcd becomes the
+                        <em>standard tool for women's goal achievement</em>,
+                        similar to how:
+                    </p>
+                    <ul>
+                        <li>
+                            Other category-defining tools became standard for
+                            email productivity
+                        </li>
+                        <li>
+                            Other category-defining tools became standard for
+                            personal knowledge management
+                        </li>
+                        <li>
+                            Other category-defining tools became standard for
+                            fitness tracking
+                        </li>
+                    </ul>
+
+                    <p><strong>End State</strong> (Year 3-5):</p>
+                    <ul>
+                        <li>500K-1M+ users globally</li>
+                        <li>$6M+ ARR with 30%+ margins</li>
+                        <li>
+                            Acquisition target for major wellness platforms or
+                            acquisition by a large wellness company
+                        </li>
+                        <li>
+                            Psychology partnerships: Research collaborations
+                            with universities, clinical psychology integration
+                        </li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Psychology Frameworks</h2>
+                    <p>
+                        Sparcd integrates 10 evidence-based frameworks: Fogg's
+                        B=MAP (Tiny Habits), Clear's identity-based change
+                        (Atomic Habits), Dweck's growth mindset, Brown's shame
+                        resilience (Daring Greatly), Nolen-Hoeksema's rumination
+                        handling, Northrup's cyclical energy phases (Do Less),
+                        Nagoski's stress cycles (Burnout), Rubin's tendencies,
+                        Rosenberg's NVC (Nonviolent Communication), and Michie's
+                        COM-B model.
+                    </p>
+                </section>
+            </main>
+        </div>
+    </body>
 </html>
